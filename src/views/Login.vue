@@ -2,10 +2,10 @@
   <div id="app">
     <div class="center">
       <div class="form">
-        <h1>Sign Up Now!</h1>
+        <h1>Login Now!</h1>
         <form>
           <div class="inputbox">
-            <input v-model="email" type="email" required />
+            <input v-model="email" type="text" required />
             <span>Email</span>
           </div>
           <div class="inputbox">
@@ -20,12 +20,14 @@
               </span>
             </button>
           </div>
-          <button type="submit" @click.prevent="login" class="submit-btn">submit</button>
+          <button type="submit" @click.prevent="login" class="submit-btn">
+            submit
+          </button>
         </form>
-          <p>
-            Don't have your account
+        <p>
+          Don't have your account
           <RouterLink class="link" to="/signup">Sign Up</RouterLink>
-          </p>
+        </p>
       </div>
     </div>
   </div>
@@ -33,6 +35,8 @@
 
 <!-- JavaScript -->
 <script>
+import Swal from "sweetalert2"
+
 export default {
   data() {
     return {
@@ -44,33 +48,40 @@ export default {
   },
   methods: {
     login() {
-      if (this.email  && this.password) {
+      if (this.email.replace(/@/, '').length != this.email.length && this.password.length >= 8) {
         localStorage.setItem("isLoggedIn", true);
         this.$router.push("/");
-      } 
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
     },
     switchV() {
       (this.passwordFieldType =
         this.passwordFieldType === "password" ? "text" : "password"),
-      this.showPass = !this.showPass;
+        (this.showPass = !this.showPass);
     },
   },
 };
-
-
 </script>
 
 <!-- style sheet -->
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap");
 
 .center {
   display: grid;
   place-items: center;
   height: 100vh;
-  font-family: 'Cuprum', sans-serif;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(7,3,53,1) 0.1%, rgba(0,7,128,1) 99.8% );
+  font-family: "Cuprum", sans-serif;
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(62, 161, 219, 1) 11.2%,
+    rgba(93, 52, 236, 1) 100.2%
+  );
 }
 
 .form {
@@ -104,7 +115,7 @@ export default {
 
 .form h1 {
   font-size: 2.5rem;
-  border-left: 5px solid dodgerblue;
+  border-left: 5px solid azure;
   padding: 10px;
   color: #fff;
   letter-spacing: 5px;

@@ -9,7 +9,7 @@
             <span>Firstname</span>
           </div>
           <div class="inputbox">
-            <input v-model="lastName" type="text" required />
+            <input v-model="firstname" type="text" required />
             <span>Lastname</span>
           </div>
           <div class="inputbox">
@@ -17,10 +17,10 @@
             <span>Email</span>
           </div>
           <div class="inputbox">
-            <input :type="passwordFieldType" v-model="password" required />
+            <input :type="passwordFieldTypeF" v-model="password" required />
             <span>Password</span>
-            <button type="button" @click="switchV">
-              <span v-if="showPass">
+            <button type="button" @click="switchF">
+              <span v-if="showPassF">
                 <i class="fa-regular fa-eye-slash"></i>
               </span>
               <span v-else>
@@ -29,10 +29,10 @@
             </button>
           </div>
           <div class="inputbox">
-            <input :type="passwordFieldType" v-model="cPassword" required />
+            <input :type="passwordFieldTypeL" v-model="cPassword" required />
             <span>Confirm password</span>
-            <button type="button" @click="switchV">
-              <span v-if="showPass">
+            <button type="button" @click="switchL">
+              <span v-if="showPassL">
                 <i class="fa-regular fa-eye-slash"></i>
               </span>
               <span v-else>
@@ -51,31 +51,40 @@
 
 <!-- JavaScript -->
 <script>
+  import Swal from 'sweetalert2';
+  
 export default {
   data() {
     return {
       firstName: "",
       lastName: "",
       showPass: true,
-      // email: `${firstName} ${lastName}`,
       email: "",
       password: "",
       cPassword: "",
-      passwordFieldType: "password",
-      email: `${this.firstName}${this.lastName}@gmail.com`,
+      passwordFieldTypeF: "password",
+      passwordFieldTypeL: "password",
+      // email: `${this.firstName}${this.lastName}@gmail.com`,
     };
   },
   methods: {
     login() {
-      if (this.email && this.password) {
+      if (this.firstName != this.lastName && this.password == this.cPassword && this.email.replace(/@/, '').length != this.email.length) {
         localStorage.setItem("isLoggedIn", true);
         this.$router.push("/");
+      } else {
+
       }
     },
-    switchV() {
-      (this.passwordFieldType =
-        this.passwordFieldType === "password" ? "text" : "password"),
-        (this.showPass = !this.showPass);
+    switchF() {
+      (this.passwordFieldTypeF =
+        this.passwordFieldTypeF === "password" ? "text" : "password"),
+        (this.showPassF = !this.showPassF);
+    },
+    switchL() {
+      (this.passwordFieldTypeL =
+        this.passwordFieldTypeL === "password" ? "text" : "password"),
+        (this.showPassL = !this.showPassL);
     },
   },
 };
@@ -95,11 +104,9 @@ body {
   place-items: center;
   height: 100vh;
   font-family: "Cuprum", sans-serif;
-  background-image: radial-gradient(
-    circle 610px at 5.2% 51.6%,
-    rgba(5, 8, 114, 1) 0%,
-    rgba(7, 3, 53, 1) 97.5%
-  );
+  /* background-color: #8BC6EC; */
+/* background-image: linear-gradient( 109.6deg,  rgba(45,116,213,1) 11.2%, rgba(121,137,212,1) 91.2% ); */
+background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );
 }
 
 .form {
