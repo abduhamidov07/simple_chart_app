@@ -28,3 +28,4 @@ npm run dev
 npm run build
 ```
 # simple_chart_app
+# webApp
