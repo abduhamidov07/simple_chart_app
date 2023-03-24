@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
-import About from "../views/About.vue";
+import MiniApp from "../views/MiniApp.vue";
+import Todo from "../views/Todo.vue";
 
 const routes = [
   {
@@ -21,9 +22,14 @@ const routes = [
     component: SignUp,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/miniapp",
+    name: "MiniApp",
+    component: MiniApp,
+  },
+  {
+    path: "/todo",
+    name: "Todo",
+    component: Todo,
   },
 ];
 

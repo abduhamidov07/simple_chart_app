@@ -51,8 +51,8 @@
 
 <!-- JavaScript -->
 <script>
-  import Swal from 'sweetalert2';
-  
+import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
@@ -69,11 +69,19 @@ export default {
   },
   methods: {
     login() {
-      if (this.firstName != this.lastName && this.password == this.cPassword && this.email.replace(/@/, '').length != this.email.length) {
+      if (
+        this.firstName != this.lastName && this.password.length >= 8  &&
+        this.password == this.cPassword &&
+        this.email.replace(/@/, "").length != this.email.length
+      ) {
         localStorage.setItem("isLoggedIn", true);
         this.$router.push("/");
       } else {
-
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       }
     },
     switchF() {
@@ -105,8 +113,12 @@ body {
   height: 100vh;
   font-family: "Cuprum", sans-serif;
   /* background-color: #8BC6EC; */
-/* background-image: linear-gradient( 109.6deg,  rgba(45,116,213,1) 11.2%, rgba(121,137,212,1) 91.2% ); */
-background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );
+  /* background-image: linear-gradient( 109.6deg,  rgba(45,116,213,1) 11.2%, rgba(121,137,212,1) 91.2% ); */
+  background-image: linear-gradient(
+    96.5deg,
+    rgba(39, 103, 187, 1) 10.4%,
+    rgba(16, 72, 144, 1) 87.7%
+  );
 }
 
 .form {
